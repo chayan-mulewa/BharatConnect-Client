@@ -33,7 +33,11 @@ export const DataProvider = ({ children }) => {
                 if (document.cookie.includes('token')) {
                     const isValidTokenResult = await IsValidToken();
                     if (isValidTokenResult) {
+                        const token = await document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
                         const socket = io(Server.webSocketURL, {
+                            extraHeaders: {
+                                "app-token": token
+                            },
                             withCredentials: true,
                         });
 
