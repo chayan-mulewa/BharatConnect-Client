@@ -36,7 +36,7 @@ export const DataProvider = ({ children }) => {
                         const token = await document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
                         const socket = io(Server.webSocketURL, {
                             extraHeaders: {
-                                "app-token": token
+                                "token": token
                             },
                             withCredentials: true,
                         });
